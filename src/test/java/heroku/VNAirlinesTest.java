@@ -68,7 +68,7 @@ public class VNAirlinesTest {
                         ExpectedConditions
                                 .visibilityOfElementLocated(By.id("roundtrip-date-depart")))
                 .getDomProperty("value");
-        Assert.assertEquals(departDate, "07/04/2025");
+        Assert.assertEquals(departDate, "09/04/2025");
     }
 
     @AfterClass
