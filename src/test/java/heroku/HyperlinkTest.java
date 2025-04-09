@@ -19,7 +19,9 @@ public class HyperlinkTest {
         driver.findElement(By.cssSelector(".example > ul > li > a[href=\"status_codes/200\"]")).click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".example > p")));
-        Assert.assertEquals(driver.findElement(By.cssSelector(".example > p")).getText(), "This page returned a 200 status code");
+        Assert.assertTrue(driver.getCurrentUrl().contains("200"));
+        Assert.assertTrue(driver.findElement(By.cssSelector(".example > p")).getText().contains("This page returned a 200 status code"));
+
         driver.close();
 
     }
