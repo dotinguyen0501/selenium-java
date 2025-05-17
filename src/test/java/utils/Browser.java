@@ -19,7 +19,12 @@ public class Browser {
 
 
     public static void openBrowser(String browser) {
-
+        if (driver != null) {
+            if (browser.equalsIgnoreCase("chrome")) {
+                driver = new ChromeDriver();
+                driver.quit();
+            }
+        }
         switch (browser.toLowerCase()) {
             case "chrome":
                 ChromeOptions chromeOptions = new ChromeOptions();
@@ -54,6 +59,7 @@ public class Browser {
     public static void closeBrowser() {
         if (driver != null) {
             driver.quit();
+            driver = null;
         }
     }
 

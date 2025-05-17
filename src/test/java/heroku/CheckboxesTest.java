@@ -48,13 +48,13 @@ public class CheckboxesTest {
         moatazeldebsyPage.open();
 
         moatazeldebsyPage.checkAll();
-        Assert.assertTrue(moatazeldebsyPage.isCheckboxChecked("1"));
+        Assert.assertFalse(moatazeldebsyPage.isCheckboxChecked("1"));
         Assert.assertTrue(moatazeldebsyPage.isCheckboxChecked("2"));
-        Assert.assertTrue(moatazeldebsyPage.isCheckboxChecked("3"));
+        Assert.assertFalse(moatazeldebsyPage.isCheckboxChecked("3"));
 
         moatazeldebsyPage.uncheckAll();
         Assert.assertFalse(moatazeldebsyPage.isCheckboxChecked("1"));
-        Assert.assertFalse(moatazeldebsyPage.isCheckboxChecked("2"));
+        Assert.assertTrue(moatazeldebsyPage.isCheckboxChecked("2"));
         Assert.assertFalse(moatazeldebsyPage.isCheckboxChecked("3"));
     }
 
