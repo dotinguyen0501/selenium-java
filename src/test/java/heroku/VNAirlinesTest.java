@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -29,7 +30,9 @@ public class VNAirlinesTest {
         profile.setPreference("permissions.default.desktop-notification", 2); // 1 = allow, 2 = deny
         FirefoxOptions options = new FirefoxOptions();
         options.setProfile(profile);
-        driver = new FirefoxDriver(options);
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.addArguments("--headless");
+        WebDriver driver = new FirefoxDriver(firefoxOptions);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 

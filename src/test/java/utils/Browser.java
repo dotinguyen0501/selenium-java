@@ -1,0 +1,104 @@
+package utils;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class Browser {
+    private static WebDriver driver;
+    public static WebDriverWait wait;
+
+
+    public static WebDriver openBrowser(String browser) {
+        WebDriver driver;
+        switch (browser.toLowerCase()) {
+            case "chrome":
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless");
+                driver = new ChromeDriver(chromeOptions);
+                break;
+
+            case "firefox":
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments("--headless");
+                driver = new FirefoxDriver(firefoxOptions);
+                break;
+            case "edge":
+                driver = new EdgeDriver();
+                break;
+            case "safari":
+                driver = new SafariDriver();
+                break;
+            default:
+                driver = new ChromeDriver();
+                break;
+        }
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        return driver;
+
+    }
+
+    public static WebDriver getDriver() {
+        return driver;
+    }
+
+    public static void closeBrowser() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
+    public static void visit(String url) {
+        driver.get(url);
+    }
+
+    public static void click(By by) {
+        wait
+                .until(ExpectedConditions.elementToBeClickable(by));
+    }
+
+    public static void fill(By by, String withText) {
+        driver.findElement(by).sendKeys(withText);
+    }
+
+    public static boolean isSelected(By by) {
+        return driver.findElement(by).isSelected();
+    }
+
+    public static void check(By by) {
+        if (!isSelected(by)) {
+            click(by);
+        }
+    }
+
+    public static void uncheck(By by) {
+        if (isSelected(by)) {
+            click(by);
+        }
+    }
+
+    public static boolean isElementPresent(By by) {
+        try {
+            return driver.findElement(by).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static String getText(By by) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(by)).getText();
+    }
+
+    public static String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+}

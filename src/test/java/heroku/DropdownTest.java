@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,7 +20,9 @@ public class DropdownTest {
         // Navigate to the page https://the-internet.herokuapp.com/dropdown
         // Select option 1
         // Verify option 1 is selected
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://the-internet.herokuapp.com/dropdown");
         //driver.findElement(By.id("dropdown")).click();
         WebElement select = driver.findElement(By.xpath("//*[@id='dropdown']"));
@@ -30,7 +33,9 @@ public class DropdownTest {
     }
     @Test
     void ableSelectMultipleOptions(){
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://output.jsbin.com/osebed/2");
         WebElement select = driver.findElement(By.id("fruits"));
         Select dropdown = new Select(select);
@@ -42,7 +47,9 @@ public class DropdownTest {
     }
     @Test
     void ableDeSelectAllOptions(){
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://output.jsbin.com/osebed/2");
         WebElement select = driver.findElement(By.id("fruits"));
         Select dropdown = new Select(select);
@@ -55,7 +62,9 @@ public class DropdownTest {
     }
     @Test
     void   ableDeSelectOption(){
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://output.jsbin.com/osebed/2");
         WebElement select = driver.findElement(By.id("fruits"));
         Select dropdown = new Select(select);
@@ -68,7 +77,9 @@ public class DropdownTest {
     }
     @Test
     void verifyTextFieldIsDisabled(){
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://the-internet.herokuapp.com/dynamic_controls");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.findElement(By.cssSelector("form input[type='text']"));

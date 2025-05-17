@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -14,7 +15,9 @@ import java.time.Duration;
 public class HyperlinkTest {
     @Test
     void VerifyHyperlink(){
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://the-internet.herokuapp.com/status_codes");
         driver.findElement(By.cssSelector(".example > ul > li > a[href=\"status_codes/200\"]")).click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
