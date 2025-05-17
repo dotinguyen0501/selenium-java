@@ -18,8 +18,8 @@ public class Browser {
     public static WebDriverWait wait;
 
 
-    public static WebDriver openBrowser(String browser) {
-        WebDriver driver;
+    public static void openBrowser(String browser) {
+
         switch (browser.toLowerCase()) {
             case "chrome":
                 ChromeOptions chromeOptions = new ChromeOptions();
@@ -43,7 +43,7 @@ public class Browser {
                 break;
         }
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        return driver;
+
 
     }
 
