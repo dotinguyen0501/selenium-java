@@ -2,11 +2,6 @@ package heroku;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -25,14 +20,14 @@ public class VNAirlinesTest {
 
     @BeforeClass
     void setUp() {
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.addArguments("--headless");
+        driver = new FirefoxDriver(firefoxOptions);
         FirefoxProfile profile = new FirefoxProfile();
         profile.setPreference("permissions.default.geo", 2); // 1 = allow, 2 = deny
         profile.setPreference("permissions.default.desktop-notification", 2); // 1 = allow, 2 = deny
         FirefoxOptions options = new FirefoxOptions();
         options.setProfile(profile);
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.addArguments("--headless");
-        WebDriver driver = new FirefoxDriver(firefoxOptions);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
