@@ -98,8 +98,8 @@ public class CheckboxesTest {
         Assert.assertFalse(moatazeldebsyPage.isCheckboxChecked("3"));
     }
 
-//    @AfterClass
-//   // void tearDown() {
-//        Browser.closeBrowser();
-//    }
+    @AfterClass
+    void tearDown() {
+        Browser.closeBrowser();
+    }
 }

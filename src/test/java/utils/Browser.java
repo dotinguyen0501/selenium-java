@@ -29,10 +29,9 @@ public class Browser {
         }
         switch (browser.toLowerCase()) {
             case "chrome":
-//                ChromeOptions chromeOptions = new ChromeOptions();
-//                chromeOptions.addArguments("--headless");
-//                driver = new ChromeDriver(chromeOptions);
-                driver = new ChromeDriver();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless");
+                driver = new ChromeDriver(chromeOptions);
                 break;
 
             case "firefox":
