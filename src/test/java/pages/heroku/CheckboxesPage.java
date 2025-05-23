@@ -1,29 +1,39 @@
 package pages.heroku;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.Browser;
 
-import static utils.Browser.check;
-import static utils.Browser.visit;
+
 
 public class CheckboxesPage {
-    private By getCheckbox(String checkboxName) {
-        return By.xpath(String.format("//form[@id='checkboxes']/input[@type='checkbox'][%d]", checkboxName));
+    private final String url = "https://the-internet.herokuapp.com/checkboxes";
+
+    // Locators for the checkboxes (1-based index)
+    private By getCheckbox(int index) {
+        return By.cssSelector("input[type='checkbox']");
     }
-    public CheckboxesPage open(){
-        visit("https://the-internet.herokuapp.com/checkboxes");
+
+    public CheckboxesPage open() {
+        Browser.visit(url);
         return this;
     }
-    public void check(String checkboxName) {
-        Browser.check(getCheckbox(checkboxName));
 
-    }
-    public void uncheck(String checkboxName) {
-        Browser.uncheck(getCheckbox(checkboxName));
-
-    }
-    public boolean isChecked(String checkboxName) {
-       return Browser.isSelected(getCheckbox(checkboxName));
+    public void check(int index) {
+        WebElement checkbox = Browser.findElements(By.cssSelector("input[type='checkbox']")).get(index - 1);
+        if (!checkbox.isSelected()) {
+            checkbox.click();
+        }
     }
 
+    public void uncheck(int index) {
+        WebElement checkbox = Browser.findElements(By.cssSelector("input[type='checkbox']")).get(index - 1);
+        if (checkbox.isSelected()) {
+            checkbox.click();
+        }
+    }
+
+    public boolean isChecked(int index) {
+        return Browser.isSelected(getCheckbox(index));
+    }
 }

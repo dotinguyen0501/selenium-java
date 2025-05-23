@@ -2,6 +2,7 @@ package utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class Browser {
     private static WebDriver driver;
@@ -27,9 +29,10 @@ public class Browser {
         }
         switch (browser.toLowerCase()) {
             case "chrome":
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--headless");
-                driver = new ChromeDriver(chromeOptions);
+//                ChromeOptions chromeOptions = new ChromeOptions();
+//                chromeOptions.addArguments("--headless");
+//                driver = new ChromeDriver(chromeOptions);
+                driver = new ChromeDriver();
                 break;
 
             case "firefox":
@@ -106,5 +109,9 @@ public class Browser {
 
     public static String getCurrentUrl() {
         return driver.getCurrentUrl();
+    }
+
+    public static List<WebElement> findElements(By by) {
+        return driver.findElements(by);
     }
 }
