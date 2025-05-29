@@ -77,6 +77,11 @@ public class Browser {
     public static void fill(By by, String withText) {
         driver.findElement(by).sendKeys(withText);
     }
+//public static void fill(By locator, String value) {
+//    WebElement element = driver.findElement(locator);
+//    element.clear();
+//    element.sendKeys(value);
+//}
 
     public static boolean isSelected(By by) {
         return driver.findElement(by).isSelected();

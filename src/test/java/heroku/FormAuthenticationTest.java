@@ -5,57 +5,49 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pages.heroku.FormAuthenticationPage;
+import utils.Browser;
+
+import java.text.Normalizer;
 
 public class FormAuthenticationTest {
+    @BeforeClass
+    void setUp() {
+        Browser.openBrowser("chrome");
+    }
 
     @Test
-    /*tc_01: Login with valid credentials*/
+        /*tc_01: Login with valid credentials*/
     void LoginWithValidCredentials() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
-        WebDriver driver = new ChromeDriver(chromeOptions);
-        driver.get("https://the-internet.herokuapp.com/login");
+        FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
+        formAuthenticationPage.open();
+        formAuthenticationPage.login("tomsmith", "SuperSecretPassword!");
 
-        driver.findElement(By.xpath("//*[@type='text']")).sendKeys("tomsmith");
-        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
-        driver.findElement(By.cssSelector("[type=submit]")).click();
-        Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
-        driver.close();
+        Assert.assertEquals(Browser.getDriver().getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
+        Assert.assertEquals(formAuthenticationPage.getWelcomeMessage(), "Welcome to the Secure Area. When you are done click logout below.");
+
     }
+
     @Test
-    /*tc_02: Login with invalid credentials*/
+        /*tc_02: Login with invalid credentials*/
     void LoginWithInvalidCredentials() {
-        // Open browser
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
-        WebDriver driver = new ChromeDriver(chromeOptions);
-        driver.get("https://the-internet.herokuapp.com/login");
-        //Fill username tomsmit
-        driver.findElement(By.id("username")).sendKeys("toms");
-        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
-        driver.findElement(By.tagName("button")).click();
-        Assert.assertEquals(driver.findElement(By.id("flash")).getText(), "Your username is invalid!\n×");
-        Assert.assertEquals(driver.findElement(By.id("flash")).getCssValue("background-color"), "rgba(198, 15, 19, 1)");
-
-        driver.close();
+        FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
+        formAuthenticationPage.open();
+        formAuthenticationPage.login("invalidUser", "invalidPassword");
+        Assert.assertEquals(Browser.getDriver().getCurrentUrl(), "https://the-internet.herokuapp.com/login");
+        Assert.assertEquals(Browser.getDriver().findElement(By.id("flash")).getText(), "Your username is invalid!\n×");
     }
 
     @Test
-    /*tc_04: Login with valid username and invalid password*/
+        /*tc_04: Login with valid username and invalid password*/
     void LoginWithInvalidPassword() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
-        WebDriver driver = new ChromeDriver(chromeOptions);
-        driver.get("https://the-internet.herokuapp.com/login");
-        driver.findElement(By.id("username")).sendKeys("tomsmith");
-        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword");
-        driver.findElement(By.tagName("button")).click();
-        Assert.assertEquals(driver.findElement(By.id("flash")).getText(), "Your password is invalid!\n×");
-        Assert.assertEquals(driver.findElement(By.id("flash")).getCssValue("background-color"), "rgba(198, 15, 19, 1)");
-
-        driver.close();}
-
+        FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
+        formAuthenticationPage.open();
+        formAuthenticationPage.login("tomsmith", "invalidPassword");
+        Assert.assertEquals(Browser.getDriver().getCurrentUrl(), "https://the-internet.herokuapp.com/login");
+        Assert.assertEquals(Browser.getDriver().findElement(By.id("flash")).getText(), "Your password is invalid!\n×");
     }
-
+}
 
