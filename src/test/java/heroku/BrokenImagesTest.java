@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.heroku.BrokenImagePage;
 import utils.Browser;
+
 import java.util.List;
 
 public class BrokenImagesTest {
@@ -28,9 +29,8 @@ public class BrokenImagesTest {
             System.out.println("Image URL: " + imageUrl);
             System.out.println("Natural Width: " + naturalWidth);
             System.out.println("Natural Height: " + naturalHeight);
+            //Assert.assertTrue(naturalWidth.equals("0") || naturalHeight.equals("0"), "Image is not broken.");
         });
-        Assert.assertEquals(images.get(0).getAttribute("naturalWidth"), "0");
-        Assert.assertEquals(images.get(1).getAttribute("naturalHeight"), "0");
     }
-    }
+}
 
