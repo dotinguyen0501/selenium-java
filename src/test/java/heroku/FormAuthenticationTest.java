@@ -24,7 +24,6 @@ public class FormAuthenticationTest {
         FormAuthenticationPage formAuthenticationPage = new FormAuthenticationPage();
         formAuthenticationPage.open();
         formAuthenticationPage.login("tomsmith", "SuperSecretPassword!");
-
         Assert.assertEquals(Browser.getDriver().getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
         Assert.assertEquals(formAuthenticationPage.getWelcomeMessage(), "Welcome to the Secure Area. When you are done click logout below.");
 
